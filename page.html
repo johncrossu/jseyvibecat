@@ -46,7 +46,12 @@ html{scroll-behavior:smooth}
 .nav a{color:var(--mut);text-decoration:none;font-size:.9rem}
 .nav a:hover{color:var(--txt)}
 h2{scroll-margin-top:70px}
-.hero{display:grid;gap:24px;align-items:center;text-align:center}
+.hero{display:grid;gap:clamp(16px,4vw,32px);align-items:center;text-align:center;grid-template-columns:1fr}
+@media(min-width:560px){.hero{grid-template-columns:1.1fr .9fr;text-align:left}.hero .btns{justify-content:flex-start}.hero .sub{margin-left:0}}
+.logo{width:clamp(110px,22vw,320px);height:clamp(110px,22vw,320px)}
+h1{font-size:clamp(1.8rem,5vw,2.8rem)}
+.wrap{max-width:1200px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,4vw,32px) 48px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .hero .logo{order:-1;justify-self:center}
 @media(min-width:800px){.hero{grid-template-columns:1.1fr .9fr;text-align:left}.hero .logo{order:0;width:320px;height:320px}.hero .sub{margin-left:0}.hero .btns{justify-content:flex-start}}
 .cat{position:relative;display:flex;gap:14px;align-items:flex-start;padding-right:52px;padding-bottom:26px;border-color:#7c3aed88;box-shadow:0 0 18px #7c3aed22}
@@ -109,6 +114,12 @@ h2{scroll-margin-top:70px}
 <div class="card tile"><span class="smp" id="aaplbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#e5e7eb;color:#111">A</i><div><b>AAPL-TEST</b><span>Apple (Testnet)</span></div></div><span class="v" id="aaplp">$182.34</span><span class="g" id="aaplg">+1.6%</span></div>
 <div class="card tile"><span class="smp" id="goldbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#f5b942;color:#3a2a00">Au</i><div><b>GOLD-TEST</b><span>Gold (RWA)</span></div></div><span class="v" id="goldp">$2,365</span><span class="g" id="goldg">+2.8%</span></div>
 </div>
+<section id="watchlab" class="card" style="margin-top:12px">
+<h3>Testnet Token Watchlist</h3>
+<p class="lead" id="wnote">Free: track 3 tokens. Verified $JVC holders unlock unlimited list + implied curve price.</p>
+<div class="row"><input id="waddr" placeholder="Paste a Robinhood testnet token address 0x..." style="flex:1;min-width:0"/><button class="btn p" id="wadd" type="button" style="border:0;cursor:pointer">Add</button></div>
+<div id="witems" style="margin-top:10px;display:flex;flex-direction:column;gap:8px"></div>
+</section>
 <h2 id="build">Build with J-seyVibeCat</h2>
 <p class="lead">Turn your ideas into something real. Get started in a few simple steps.</p>
 <div class="steps"><div class="card step"><div class="n">1</div><b>Pick an idea</b><span>Meme, product, market or all three.</span></div><div class="card step"><div class="n">2</div><b>Build</b><span>Use your skills, tools and creativity.</span></div><div class="card step"><div class="n">3</div><b>Deploy to Testnet</b><span>Ship your project on the testnet.</span></div><div class="card step"><div class="n">4</div><b>Earn builder recognition</b><span>Get noticed. Grow. Be part of the movement.</span></div></div>
@@ -267,6 +278,7 @@ put('wa',w.slice(0,6)+'...'+w.slice(-4));
 put('wb',(bal/(BigInt(10)**dec)).toLocaleString('en-US'));
 put('wp',(Number(bal*BigInt(10000)/sup)/100).toFixed(2)+'%');
 var tr=tierOf(bal,sup);
+if(window.JVC_SET_HOLDER)window.JVC_SET_HOLDER(verified&&bal>BigInt(0));
 put('wt',tr==='None'?'No $JVC held':tr);
 res.style.display='block';
 btn.textContent='Switch wallet';
@@ -317,5 +329,104 @@ provs.forEach(function(w){mk(w.name,function(){connect(w.p)})});
 mk('WalletConnect',connectWC);
 };
 }catch(e){}})();
+(function () {
+  var EX = 'https://explorer.testnet.chain.robinhood.com/api/v2/';
+  var CURVE = '0xA7FcB6e71A1AECd9686DC66248C4173dEfe306bb';
+  var JVC = document.getElementById('ca').textContent.trim();
+  var KEY = 'jvc_watchlist_v1';
+  var FREE_CAP = 3;
+  var holder = false;
+
+  function load() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
+  function save(list) { localStorage.setItem(KEY, JSON.stringify(list)); }
+
+  function ratioStr(numB, denB, decOut) {
+    if (denB <= 0n) return null;
+    var scale = 10n ** BigInt(decOut);
+    var scaled = (numB * scale) / denB;
+    var s = scaled.toString();
+    while (s.length <= decOut) s = '0' + s;
+    var ip = s.slice(0, s.length - decOut) || '0';
+    var fp = s.slice(s.length - decOut);
+    if (ip === '0') {
+      var m = fp.match(/^(0*)([1-9]\d{0,4})/);
+      if (m) return '0.' + m[1] + m[2];
+      return '0.' + fp.slice(0, decOut);
+    }
+    return ip + '.' + fp.slice(0, 4);
+  }
+
+  function fetchToken(addr) {
+    return Promise.all([
+      fetch(EX + 'tokens/' + addr).then(function (r) { if (!r.ok) throw 0; return r.json(); }),
+      fetch(EX + 'tokens/' + addr + '/counters').then(function (r) { return r.ok ? r.json() : {}; }),
+      holder ? Promise.all([
+        fetch(EX + 'addresses/' + CURVE).then(function (r) { return r.ok ? r.json() : null; }),
+        fetch(EX + 'addresses/' + CURVE + '/token-balances').then(function (r) { return r.ok ? r.json() : []; })
+      ]) : Promise.resolve(null)
+    ]).then(function (x) {
+      var d = x[0], c = x[1], curve = x[2], price = null;
+      if (curve && curve[0]) {
+        var raised = BigInt(curve[0].coin_balance || '0');
+        var arr = Array.isArray(curve[1]) ? curve[1] : (curve[1].items || []);
+        var curveBal = 0n;
+        for (var i = 0; i < arr.length; i++) {
+          var t = arr[i].token || {};
+          var h = (t.address_hash || t.address || '').toLowerCase();
+          if (h === addr.toLowerCase()) curveBal = BigInt(arr[i].value || '0');
+        }
+        var sold = BigInt(d.total_supply || '0') - curveBal;
+        if (sold > 0n) price = ratioStr(raised, sold, 18);
+      }
+      var dec = BigInt(d.decimals || 18);
+      var supply = 'n/a';
+      try { supply = (BigInt(d.total_supply) / (10n ** dec)).toLocaleString('en-US'); } catch (e) {}
+      return { address: addr, name: d.name || 'Unknown', symbol: d.symbol || '', holders: d.holders_count || '0', transfers: c.transfers_count || '0', supply: supply, price: price };
+    });
+  }
+
+  window.JVC_SET_HOLDER = function (isHolder) {
+    holder = !!isHolder;
+    var n = document.getElementById('wnote');
+    if (n) n.textContent = holder ? '$JVC holder unlocked: unlimited watchlist + implied curve price.' : 'Free: 3 tokens. Connect and verify a $JVC wallet for the full tool.';
+    render();
+  };
+
+  function render() {
+    var box = document.getElementById('witems');
+    if (!box) return;
+    var list = load();
+    if (list.length === 0) { list = [JVC]; save(list); }
+    box.innerHTML = '';
+    list.forEach(function (addr) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.textContent = 'Loading ' + addr.slice(0, 10) + '...';
+      box.appendChild(card);
+      fetchToken(addr).then(function (t) {
+        card.innerHTML = '<b>' + t.name + ' ($' + t.symbol + ')</b><br>' + t.address.slice(0, 8) + '...' + t.address.slice(-4) + '<br>Holders: ' + t.holders + ' &middot; Transfers: ' + t.transfers + ' &middot; Supply: ' + t.supply + (holder && t.price ? '<br>Implied: &asymp;' + t.price + ' tETH' : '') + ' <button type="button" data-rm="' + t.address + '">Remove</button>';
+        card.querySelector('button').onclick = function () {
+          save(load().filter(function (a) { return a.toLowerCase() !== t.address.toLowerCase(); }));
+          render();
+        };
+      }).catch(function () { card.textContent = 'Could not load ' + addr; });
+    });
+  }
+
+  var addBtn = document.getElementById('wadd');
+  if (addBtn) addBtn.onclick = function () {
+    var addr = document.getElementById('waddr').value.trim();
+    if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { var wn=document.getElementById('wnote'); if(wn){wn.textContent='Paste a valid 0x address.'; setTimeout(function(){wn.textContent=holder?'$JVC holder unlocked: unlimited watchlist + implied curve price.':'Free: 3 tokens. Connect and verify a $JVC wallet for the full tool.';},2500);} return; }
+    var list = load();
+    if (list.some(function (a) { return a.toLowerCase() === addr.toLowerCase(); })) return;
+    if (!holder && list.length >= FREE_CAP) { var wn2=document.getElementById('wnote'); if(wn2){wn2.textContent='Free cap is 3. Hold $JVC to unlock unlimited.'; setTimeout(function(){wn2.textContent=holder?'$JVC holder unlocked: unlimited watchlist + implied curve price.':'Free: 3 tokens. Connect and verify a $JVC wallet for the full tool.';},2500);} return; }
+    list.push(addr);
+    save(list);
+    document.getElementById('waddr').value = '';
+    render();
+  };
+
+  render();
+})();
 function copyCA(b){var t=document.getElementById('ca').textContent;navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)})}
 </script></body></html>
