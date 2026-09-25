@@ -245,7 +245,7 @@ metadata:{name:'J-seyVibeCat',description:'$JVC testnet token page',url:location
 wcProvider=p;
 if(p.on&&hooked.indexOf(p)<0){
 hooked.push(p);
-p.on('accountsChanged',function(n){if(n&&n[0]){show(n[0])}else{res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')}});
+p.on('accountsChanged',function(n){if(n&&n[0]){show(n[0])}});
 p.on('disconnect',function(){res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')});
 }
 return p;
