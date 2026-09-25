@@ -1,0 +1,8 @@
+worker.js
+worker.backup.js
+page.backup*.html
+build.py.backup*
+check.html
+patch_logo*.py
+scan/
+node_modules/

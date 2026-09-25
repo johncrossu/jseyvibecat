@@ -1,0 +1,2 @@
+#!/bin/bash
+cd ~/vibecat && curl -s -X PUT "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/workers/scripts/vibecat" -H "Authorization: Bearer $CF_API_TOKEN" -F 'metadata={"main_module":"worker.js","compatibility_date":"2026-09-01"};type=application/json' -F 'worker.js=@worker.js;type=application/javascript+module' | grep -o '"success": *[a-z]*' || echo "DEPLOY FAILED"

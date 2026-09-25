@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script type="importmap">{"imports":{"https://cdn.jsdelivr.net/npm/lodash@4.17.21/+esm":"https://cdn.skypack.dev/lodash@4.17.21"}}</script><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J-seyVibeCat ($JVC) | Testnet project</title>
+<meta name="description" content="J-seyVibeCat ($JVC) is an experimental testnet project by J-sey on the vibe/vibe testnet.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="J-seyVibeCat ($JVC) | Testnet project">
+<meta property="og:description" content="J-seyVibeCat ($JVC) is an experimental testnet project by J-sey on the vibe/vibe testnet.">
+<meta property="og:url" content="https://jseyvibecat.jsey.dpdns.org"><meta property="og:image" content="https://jseyvibecat.jsey.dpdns.org/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="J-seyVibeCat ($JVC) | Testnet project">
+<meta name="twitter:description" content="J-seyVibeCat ($JVC) is an experimental testnet project by J-sey on the vibe/vibe testnet."><meta name="twitter:image" content="https://jseyvibecat.jsey.dpdns.org/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+<style>
+:root{--bg:#050816;--card:#0b1230;--line:#1c2a5a;--txt:#e8f0ff;--mut:#9fb3d9;--c1:#22d3ee;--c2:#a855f7}
+*{box-sizing:border-box}
+html{background:#050816}body{margin:0;min-height:100vh;background-repeat:no-repeat;background:radial-gradient(circle at 50% -10%,#14204d 0,var(--bg) 55%);color:var(--txt);font-family:system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 20px 48px}
+.hero{text-align:center}
+.logo{width:150px;height:150px;border-radius:50%;box-shadow:0 0 40px #7c3aed66}
+.tag{display:inline-block;border:1px solid var(--c1);color:var(--c1);border-radius:99px;padding:4px 14px;font-size:.75rem;margin:16px 0 8px}
+h1{font-size:2.4rem;margin:0;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;color:transparent}
+.tk{color:var(--c1);font-weight:700;margin-top:4px}
+.sub{color:var(--mut);max-width:460px;margin:10px auto 18px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:12px;font-weight:600;text-decoration:none;font-size:.95rem}
+.p{background:linear-gradient(90deg,#0ea5e9,#8b5cf6);color:#fff}
+.s{border:1px solid var(--line);color:var(--txt)}
+.ca{margin:26px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.ca small{color:var(--mut);display:block;margin-bottom:6px}
+.ca code{display:block;word-break:break-all;font-size:.82rem;color:var(--c1)}
+.ca button{margin-top:10px;background:none;border:1px solid var(--c1);color:var(--c1);border-radius:8px;padding:6px 14px;cursor:pointer}
+h2{font-size:1.15rem;margin:34px 0 12px}
+.grid{display:grid;gap:12px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card b{display:block;margin-bottom:4px}
+.card span{color:var(--mut);font-size:.9rem}
+.soon{font-size:.7rem;color:var(--c2);border:1px solid var(--c2);border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+footer{margin-top:40px;color:var(--mut);font-size:.8rem;text-align:center}
+html{scroll-behavior:smooth}
+.nav{position:sticky;top:0;z-index:5;background:#050816cc;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav div{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:20px}
+.brand{margin-right:auto;font-weight:800;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;color:transparent}
+.nav a{color:var(--mut);text-decoration:none;font-size:.9rem}
+.nav a:hover{color:var(--txt)}
+h2{scroll-margin-top:70px}
+.hero{display:grid;gap:24px;align-items:center;text-align:center}
+.hero .logo{order:-1;justify-self:center}
+@media(min-width:800px){.hero{grid-template-columns:1.1fr .9fr;text-align:left}.hero .logo{order:0;width:320px;height:320px}.hero .sub{margin-left:0}.hero .btns{justify-content:flex-start}}
+.cat{position:relative;display:flex;gap:14px;align-items:flex-start;padding-right:52px;padding-bottom:26px;border-color:#7c3aed88;box-shadow:0 0 18px #7c3aed22}
+.ic{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--c1);display:grid;place-items:center;font-style:normal;color:var(--c1);font-weight:700;font-size:.95rem}
+.arr{position:absolute;right:14px;bottom:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--c1);color:var(--c1);display:grid;place-items:center;font-style:normal}
+.steps{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:800px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{position:relative}
+.n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--c1);color:var(--c1);font-weight:700;font-size:.85rem;margin-bottom:10px}
+.lead{color:var(--mut);margin:-4px 0 14px;font-size:.92rem}
+.mlg{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:800px){.mlg{grid-template-columns:repeat(4,1fr)}}
+.real{grid-column:1/-1;border-color:var(--c1)}
+.real .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.real .row:last-of-type{border-bottom:0}
+.real .row span{color:var(--mut)}
+.real .row strong{color:var(--txt)}
+.live{font-size:.7rem;color:var(--c1);border:1px solid var(--c1);border-radius:99px;padding:2px 8px;margin-left:8px}
+.smp{font-size:.65rem;color:#f5b942;border:1px solid #f5b942;border-radius:99px;padding:2px 8px;display:inline-block;margin-bottom:8px}
+.tile .v{font-size:1.3rem;font-weight:700;color:var(--txt);display:block;margin-top:6px}
+.tile .g{color:#34d399;font-size:.85rem}
+.note{color:var(--mut);font-size:.8rem;margin:10px 0 0}
+.th{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.lg{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-style:normal;flex:none;object-fit:cover;background:#0b1230}
+.mini{display:flex;justify-content:space-between;gap:8px;font-size:.78rem;color:var(--mut);margin-top:6px}
+.mini b{color:var(--txt);font-weight:600}
+.stg{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+.stat{text-align:center}
+.stat .big{display:block;font-size:1.25rem;font-weight:800;color:var(--c1);margin-top:6px;word-break:break-all}
+.stat span.k{color:var(--mut);font-size:.8rem}
+.tiers{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.tr{width:38px;height:38px;border-radius:10px;border:1px solid var(--c2);color:var(--c2);display:grid;place-items:center;font-weight:800}
+.wrow{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.wrow span{color:var(--mut)}
+.wrow strong{word-break:break-all;text-align:right}
+.tbig{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;border:1px solid var(--c2);color:var(--c2);font-weight:800;font-size:1.3rem}
+</style></head><body>
+<div class="nav"><div><span class="brand">J-sey · J-seyVibeCat</span><a href="#top">Home</a><a href="#about">About</a><a href="#market">Market Lab</a><a href="#build">Build</a><a href="#board">Leaderboard</a></div></div>
+<div class="wrap" id="top">
+<div class="hero"><div class="ht">
+<div><span class="tag">TESTNET PROJECT</span></div>
+<h1>J-seyVibeCat</h1>
+<div class="tk">$JVC</div>
+<p class="sub">A cyber-cat exploring markets, memes and on-chain ideas. An experimental testnet project by J-sey. No real money, no financial advice.</p>
+<div class="btns"><a class="btn p" href="https://testnet.vibevibe.fun/token/0xA79b75CFed3D0b1de47A313cfE18b2322c51e301" target="_blank" rel="noopener">View on vibe/vibe</a><a class="btn p" href="https://explorer.testnet.chain.robinhood.com/address/0xA79b75CFed3D0b1de47A313cfE18b2322c51e301?tab=index" target="_blank" rel="noopener">Explorer</a><a class="btn p" href="https://x.com/jseyvibecat" target="_blank" rel="noopener">X @jseyvibecat</a></div></div>
+<img class="logo" src="data:image/png;base64,%%LOGO%%" alt="J-seyVibeCat logo">
+</div>
+<div class="ca"><small>Contract address (testnet)</small><code id="ca">0xA79b75CFed3D0b1de47A313cfE18b2322c51e301</code><button onclick="copyCA(this)">Copy</button></div>
+<h2 id="about">What we are building</h2><p class="lead">One project spanning all three: meme &amp; storytelling, useful infra, and live market data.</p>
+<div class="grid">
+<div class="card cat"><i class="ic">&#128049;</i><div><b>Meme &amp; Art</b><span>Storytelling, culture and a cyber-cat with a personality.</span></div><em class="arr">&rarr;</em></div>
+<div class="card cat"><i class="ic">&lt;/&gt;</i><div><b>Infra &amp; Product</b><span>Useful tools built around the token launch lifecycle.</span></div><em class="arr">&rarr;</em></div>
+<div class="card cat"><i class="ic">&#128200;</i><div><b>Stock &amp; RWA</b><span>Exploring stock pairs and real-world-asset ideas on testnet.</span></div><em class="arr">&rarr;</em></div>
+</div>
+<h2 id="market">Market Lab <span class="soon">TESTNET</span></h2>
+<p class="lead">Live $JVC data from the testnet explorer. Sample tiles are labelled and are not real prices.</p>
+<div class="mlg">
+<div class="card tile"><span class="live" style="margin:0 0 8px">LIVE</span><div class="th"><img class="lg" id="jlogo" alt="JVC"><div><b>$JVC</b><span>J-seyVibeCat (Testnet)</span></div></div><span class="v" id="jp">Loading...</span><span class="g" id="jst">Loading...</span><div class="mini"><span>Holders <b id="jh">...</b></span><span>Transfers <b id="jt">...</b></span></div><div class="mini"><span>Supply <b id="js">...</b></span></div><div class="mini"><span>24h vol <b id="jv">...</b></span></div></div>
+<div class="card tile"><span class="smp" id="btcbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#f7931a;color:#fff">&#8383;</i><div><b>BTC-TEST</b><span>Bitcoin (Testnet)</span></div></div><span class="v" id="btcp">$67,832</span><span class="g" id="btcg">+3.2%</span></div>
+<div class="card tile"><span class="smp" id="aaplbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#e5e7eb;color:#111">A</i><div><b>AAPL-TEST</b><span>Apple (Testnet)</span></div></div><span class="v" id="aaplp">$182.34</span><span class="g" id="aaplg">+1.6%</span></div>
+<div class="card tile"><span class="smp" id="goldbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#f5b942;color:#3a2a00">Au</i><div><b>GOLD-TEST</b><span>Gold (RWA)</span></div></div><span class="v" id="goldp">$2,365</span><span class="g" id="goldg">+2.8%</span></div>
+</div>
+<h2 id="build">Build with J-seyVibeCat</h2>
+<p class="lead">Turn your ideas into something real. Get started in a few simple steps.</p>
+<div class="steps"><div class="card step"><div class="n">1</div><b>Pick an idea</b><span>Meme, product, market or all three.</span></div><div class="card step"><div class="n">2</div><b>Build</b><span>Use your skills, tools and creativity.</span></div><div class="card step"><div class="n">3</div><b>Deploy to Testnet</b><span>Ship your project on the testnet.</span></div><div class="card step"><div class="n">4</div><b>Earn builder recognition</b><span>Get noticed. Grow. Be part of the movement.</span></div></div>
+<h2 id="board">Leaderboard <span class="live">LIVE STATS</span></h2>
+<p class="lead">Real $JVC numbers from the testnet explorer.</p>
+<div class="stg"><div class="card stat"><span class="k">Holders</span><span class="big" id="lh">...</span></div><div class="card stat"><span class="k">Transfers</span><span class="big" id="lt">...</span></div><div class="card stat"><span class="k">Total supply</span><span class="big" id="ls">...</span></div></div>
+<div class="card" style="margin-top:12px"><b>Supporter tiers <span class="live">LIVE</span></b><div class="tiers"><i class="tr" style="font-style:normal">F</i><i class="tr" style="font-style:normal">E</i><i class="tr" style="font-style:normal">D</i><i class="tr" style="font-style:normal">C</i><i class="tr" style="font-style:normal">B</i><i class="tr" style="font-style:normal">A</i><i class="tr" style="font-style:normal">S</i></div><span>Holder and supporter tiers from F to S, used for graduation airdrops. Opt-in only.</span></div>
+<h2>Graduation airdrops <span class="soon">COMING SOON</span></h2>
+<p class="lead">Opt-in only. Builders choose how much supply to airdrop and to whom. Nothing is live yet.</p>
+<div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="card step"><div class="n">1</div><b>Connect your wallet</b><span>Connect the wallet you hold the token with. View only.</span></div><div class="card step"><div class="n">2</div><b>Get your tier</b><span>A holder/supporter score from F to S.</span></div><div class="card step"><div class="n">3</div><b>Auto-send on graduation</b><span>Airdrops are sent automatically when a token graduates.</span></div></div>
+<div class="card" id="wallet" style="margin-top:12px"><b>Check your tier <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 12px">Connect a wallet to see its $JVC balance and tier. View only: no signature, no fees, nothing is saved.</p><button class="btn p" id="wcb" type="button" style="border:0;cursor:pointer">Connect wallet</button><div id="wlist" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;max-width:320px"></div><p class="note" id="wst"></p><div id="wres" style="display:none;margin-top:10px"><div class="wrow"><span>Wallet</span><strong id="wa"></strong></div><div class="wrow"><span>$JVC balance</span><strong id="wb"></strong></div><div class="wrow"><span>Share of supply</span><strong id="wp"></strong></div><div class="wrow" style="border-bottom:0"><span>Your tier</span><strong id="wt" class="tbig"></strong></div></div><p class="note">Tiers by share of supply: S 1%+ &middot; A 0.5%+ &middot; B 0.25%+ &middot; C 0.1%+ &middot; D 0.05%+ &middot; E 0.01%+ &middot; F any amount.</p></div>
+<footer>Testnet only. Test tokens have no real value. Not financial advice. Not affiliated with vibe/vibe. Built by J-sey. &middot; <a href="https://discord.gg/vibevibebuilders" target="_blank" rel="noopener" style="color:#7dd3fc;text-decoration:underline">Builders Discord</a></footer>
+</div>
+<script>
+try{var fi=document.querySelector('link[rel=icon]'),lg=document.querySelector('.logo');if(fi&&lg){fi.href=lg.src;fi.type='image/png'}}catch(e){}
+(function(){try{var ca=document.getElementById('ca').textContent.trim();var b='https://explorer.testnet.chain.robinhood.com/api/v2/tokens/'+ca;var CURVE='0xA7FcB6e71A1AECd9686DC66248C4173dEfe306bb';
+function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t}
+function ratioStr(numB,denB,decOut){
+if(denB<=BigInt(0))return null;
+var scale=BigInt(10)**BigInt(decOut);
+var scaled=(numB*scale)/denB;
+var s=scaled.toString();
+while(s.length<=decOut)s='0'+s;
+var ip=s.slice(0,s.length-decOut)||'0';
+var fp=s.slice(s.length-decOut);
+if(ip==='0'){var m=fp.match(/^(0*)([1-9]\d{0,4})/);if(m)return '0.'+m[1]+m[2];return '0.'+fp.slice(0,decOut)}
+return ip+'.'+fp.slice(0,4);
+}
+function impliedPrice(totalSupplyStr){
+Promise.all([
+fetch('https://explorer.testnet.chain.robinhood.com/api/v2/addresses/'+CURVE).then(function(r){return r.ok?r.json():null}),
+fetch('https://explorer.testnet.chain.robinhood.com/api/v2/addresses/'+CURVE+'/token-balances').then(function(r){return r.ok?r.json():[]})
+]).then(function(x){
+if(!x[0])throw 0;
+var raised=BigInt(x[0].coin_balance||'0');
+var arr=Array.isArray(x[1])?x[1]:(x[1].items||[]);
+var curveBal=BigInt(0);
+for(var i=0;i<arr.length;i++){var t=arr[i].token||{};var h=(t.address_hash||t.address||'').toLowerCase();if(h===ca.toLowerCase()){curveBal=BigInt(arr[i].value||'0')}}
+var total=BigInt(totalSupplyStr);
+var sold=total-curveBal;
+if(sold<=BigInt(0))throw 0;
+var price=ratioStr(raised,sold,18);
+if(price===null)throw 0;
+set('jp','\u2248'+price+' tETH');
+set('jst','')
+}).catch(function(){set('jst','Live from testnet explorer')});
+}
+fetch(b).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+set('jh',d.holders_count||'0');
+try{var dec=BigInt(10)**BigInt(d.decimals||18);set('js',(BigInt(d.total_supply)/dec).toLocaleString('en-US'))}catch(e){set('js','n/a')}
+set('jv',d.volume_24h?'$'+d.volume_24h:'No volume yet');
+if(d.exchange_rate){set('jp','$'+d.exchange_rate);set('jst','Live from testnet explorer')}
+else{set('jp','Loading...');impliedPrice(d.total_supply)}
+}).catch(function(){set('jp','n/a');set('jh','n/a');set('js','n/a');set('jv','n/a');set('jst','Live data unavailable right now')});
+fetch(b+'/counters').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){set('jt',d.transfers_count||'0')}).catch(function(){set('jt','n/a')});
+}catch(e){}})();
+(function(){try{
+var bp=document.getElementById('btcp'),bg=document.getElementById('btcg'),bb=document.getElementById('btcbadge');
+if(!bp||!bg)return;
+function fmt(n){return '$'+n.toLocaleString('en-US',{maximumFractionDigits:2})}
+function loadBtc(){
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+var p=d.bitcoin&&d.bitcoin.usd,ch=d.bitcoin&&d.bitcoin.usd_24h_change;
+if(typeof p==='number'){bp.textContent=fmt(p);if(bb){bb.textContent='LIVE';bb.className='live'}}
+if(typeof ch==='number')bg.textContent=(ch>=0?'+':'')+ch.toFixed(2)+'%';
+}).catch(function(){});
+}
+loadBtc();
+setInterval(loadBtc,60000);
+}catch(e){}})();
+(function(){try{
+var ap=document.getElementById('aaplp'),ag=document.getElementById('aaplg'),ab=document.getElementById('aaplbadge');
+if(!ap||!ag)return;
+function loadAapl(){
+fetch('https://finnhub.io/api/v1/quote?symbol=AAPL&token=daqtqepr01qott5iu8v0daqtqepr01qott5iu8vg').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+if(typeof d.c==='number'&&d.c>0){
+ap.textContent='$'+d.c.toLocaleString('en-US',{maximumFractionDigits:2});
+if(typeof d.dp==='number')ag.textContent=(d.dp>=0?'+':'')+d.dp.toFixed(2)+'%';
+if(ab){ab.textContent='LIVE';ab.className='live'}
+}
+}).catch(function(){});
+}
+loadAapl();
+setInterval(loadAapl,60000);
+}catch(e){}})();
+(function(){try{
+var gp=document.getElementById('goldp'),gg=document.getElementById('goldg'),gb=document.getElementById('goldbadge');
+if(!gp||!gg)return;
+function loadGold(){
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd&include_24hr_change=true').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+var p=d['pax-gold']&&d['pax-gold'].usd,ch=d['pax-gold']&&d['pax-gold'].usd_24h_change;
+if(typeof p==='number'){
+gp.textContent='$'+p.toLocaleString('en-US',{maximumFractionDigits:2});
+if(typeof ch==='number')gg.textContent=(ch>=0?'+':'')+ch.toFixed(2)+'%';
+if(gb){gb.textContent='LIVE';gb.className='live'}
+}
+}).catch(function(){});
+}
+loadGold();
+setInterval(loadGold,60000);
+}catch(e){}})();
+try{var jl=document.getElementById('jlogo'),pl=document.querySelector('.hero .logo');if(jl&&pl)jl.src=pl.src}catch(e){}
+(function(){try{var ca=document.getElementById('ca').textContent.trim();var b='https://explorer.testnet.chain.robinhood.com/api/v2/tokens/'+ca;
+function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t}
+fetch(b).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){set('lh',d.holders_count||'0');try{set('ls',(BigInt(d.total_supply)/(BigInt(10)**BigInt(d.decimals||18))).toLocaleString('en-US'))}catch(e){set('ls','n/a')}}).catch(function(){set('lh','n/a');set('ls','n/a')});
+fetch(b+'/counters').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){set('lt',d.transfers_count||'0')}).catch(function(){set('lt','n/a')});
+}catch(e){}})();
+(function(){try{
+var ca=document.getElementById('ca').textContent.trim();
+var B='https://explorer.testnet.chain.robinhood.com/api/v2/';
+var btn=document.getElementById('wcb'),st=document.getElementById('wst'),res=document.getElementById('wres'),list=document.getElementById('wlist');
+if(!btn)return;
+var T=[['S',100],['A',50],['B',25],['C',10],['D',5],['E',1]];
+var provs=[],hooked=[],wcProvider=null,wcMod=null;
+function say(t){st.textContent=t}
+function put(id,t){document.getElementById(id).textContent=t}
+function guess(p){return (p.isOkxWallet||p.isOKExWallet)?'OKX Wallet':(p.isTrust||p.isTrustWallet)?'Trust Wallet':p.isCoinbaseWallet?'Coinbase Wallet':p.isMetaMask?'MetaMask':'Browser wallet'}
+function add(name,p){for(var i=0;i<provs.length;i++){if(provs[i].p===p)return}provs.push({name:name,p:p})}
+window.addEventListener('eip6963:announceProvider',function(e){var d=e.detail||{};if(d.provider)add((d.info&&d.info.name)||guess(d.provider),d.provider)});
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+function tierOf(bal,sup){if(bal<=BigInt(0))return 'None';var bps=bal*BigInt(10000)/sup;for(var i=0;i<T.length;i++){if(bps>=BigInt(T[i][1]))return T[i][0]}return 'F'}
+function mk(label,fn){var b=document.createElement('button');b.type='button';b.className='btn s';b.style.cssText='background:none;cursor:pointer;font-family:inherit;text-align:left';b.textContent=label;b.onclick=fn;list.appendChild(b)}
+var wcInitPromise=null;
+function ensureWC(){
+if(wcInitPromise)return wcInitPromise;
+wcInitPromise=import('https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.2/+esm').then(function(m){
+return m.EthereumProvider.init({
+projectId:'30d31d2613303ead87cb6c9ed85c06d6',
+optionalChains:[46630],
+showQrModal:true,
+metadata:{name:'J-seyVibeCat',description:'$JVC testnet token page',url:location.origin,icons:[]}
+});
+}).then(function(p){
+wcProvider=p;
+if(p.on&&hooked.indexOf(p)<0){
+hooked.push(p);
+p.on('accountsChanged',function(n){if(n&&n[0]){show(n[0])}else{res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')}});
+p.on('disconnect',function(){res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')});
+}
+return p;
+}).catch(function(err){wcInitPromise=null;throw err});
+return wcInitPromise;
+}
+if(window.requestIdleCallback){requestIdleCallback(function(){ensureWC().catch(function(){})})}else{setTimeout(function(){ensureWC().catch(function(){})},1200)}
+function show(w){
+say('Reading balance...');
+Promise.all([
+fetch(B+'addresses/'+w+'/token-balances').then(function(r){return r.ok?r.json():[]}),
+fetch(B+'tokens/'+ca).then(function(r){if(!r.ok)throw 0;return r.json()})
+]).then(function(x){
+var arr=Array.isArray(x[0])?x[0]:(x[0].items||[]);
+var bal=BigInt(0);
+for(var i=0;i<arr.length;i++){var t=arr[i].token||{};var h=(t.address_hash||t.address||'').toLowerCase();if(h===ca.toLowerCase()){bal=BigInt(arr[i].value||'0')}}
+var sup=BigInt(x[1].total_supply),dec=BigInt(x[1].decimals||18);
+put('wa',w.slice(0,6)+'...'+w.slice(-4));
+put('wb',(bal/(BigInt(10)**dec)).toLocaleString('en-US'));
+put('wp',(Number(bal*BigInt(10000)/sup)/100).toFixed(2)+'%');
+var tr=tierOf(bal,sup);
+put('wt',tr==='None'?'No $JVC held':tr);
+res.style.display='block';
+btn.textContent='Switch wallet';
+list.innerHTML='';
+say('');
+}).catch(function(){say('Could not read the balance. Please try again.')});
+}
+function connect(p){
+list.innerHTML='';
+say('Waiting for wallet...');
+p.request({method:'eth_requestAccounts'}).then(function(a){
+if(!a||!a[0])throw 0;
+if(p.on&&hooked.indexOf(p)<0){hooked.push(p);p.on('accountsChanged',function(n){if(n&&n[0]){show(n[0])}else{res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')}})}
+show(a[0]);
+}).catch(function(err){say(err&&err.code===4001?'Connection cancelled.':'Could not connect. Please try again.')});
+}
+function connectWC(retry){
+list.innerHTML='';
+say(retry?'Retrying connection...':'Opening WalletConnect...');
+ensureWC().then(function(p){
+return p.connect();
+}).then(function(){
+var accs=(wcProvider&&wcProvider.accounts)||[];
+if(accs[0]){show(accs[0])}else{say('No account returned.')}
+}).catch(function(err){
+if(!retry){setTimeout(function(){connectWC(true)},900);return}
+say(err&&err.message?err.message:'Could not connect. Please try again.');
+});
+}
+btn.onclick=function(){
+list.innerHTML='';
+provs=[];
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+if(window.ethereum)add(guess(window.ethereum),window.ethereum);
+say(provs.length?'Choose a wallet:':'Choose WalletConnect to scan a QR code or open your wallet app:');
+provs.forEach(function(w){mk(w.name,function(){connect(w.p)})});
+mk('WalletConnect',connectWC);
+};
+}catch(e){}})();
+function copyCA(b){var t=document.getElementById('ca').textContent;navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)})}
+</script></body></html>
