@@ -253,7 +253,7 @@ return p;
 return wcInitPromise;
 }
 if(window.requestIdleCallback){requestIdleCallback(function(){ensureWC().catch(function(){})})}else{setTimeout(function(){ensureWC().catch(function(){})},1200)}
-function show(w){
+function show(w,verified){
 say('Reading balance...');
 Promise.all([
 fetch(B+'addresses/'+w+'/token-balances').then(function(r){return r.ok?r.json():[]}),
@@ -271,8 +271,19 @@ put('wt',tr==='None'?'No $JVC held':tr);
 res.style.display='block';
 btn.textContent='Switch wallet';
 list.innerHTML='';
-say('');
+say(verified?'✓ Verified':'');
 }).catch(function(){say('Could not read the balance. Please try again.')});
+}
+function toHex(str){return '0x'+Array.from(new TextEncoder().encode(str)).map(function(b){return b.toString(16).padStart(2,'0')}).join('')}
+function verifyAndShow(p,w){
+say('Please sign to verify wallet ownership...');
+var msg='Sign to verify you control this wallet for J-seyVibeCat. No fees. Nothing is stored. '+new Date().toISOString();
+p.request({method:'personal_sign',params:[toHex(msg),w]}).then(function(sig){
+if(!sig)throw 0;
+show(w,true);
+}).catch(function(err){
+say(err&&err.code===4001?'Signature rejected.':'Could not verify wallet. Please try again.');
+});
 }
 function connect(p){
 list.innerHTML='';
@@ -280,7 +291,7 @@ say('Waiting for wallet...');
 p.request({method:'eth_requestAccounts'}).then(function(a){
 if(!a||!a[0])throw 0;
 if(p.on&&hooked.indexOf(p)<0){hooked.push(p);p.on('accountsChanged',function(n){if(n&&n[0]){show(n[0])}else{res.style.display='none';btn.textContent='Connect wallet';say('Wallet disconnected.')}})}
-show(a[0]);
+verifyAndShow(p,a[0]);
 }).catch(function(err){say(err&&err.code===4001?'Connection cancelled.':'Could not connect. Please try again.')});
 }
 function connectWC(retry){
@@ -290,7 +301,7 @@ ensureWC().then(function(p){
 return p.connect();
 }).then(function(){
 var accs=(wcProvider&&wcProvider.accounts)||[];
-if(accs[0]){show(accs[0])}else{say('No account returned.')}
+if(accs[0]){verifyAndShow(wcProvider,accs[0])}else{say('No account returned.')}
 }).catch(function(err){
 if(!retry){setTimeout(function(){connectWC(true)},900);return}
 say(err&&err.message?err.message:'Could not connect. Please try again.');
