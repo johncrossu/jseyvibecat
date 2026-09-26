@@ -45,6 +45,13 @@ html{scroll-behavior:smooth}
 .brand{margin-right:auto;font-weight:800;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;color:transparent}
 .nav a{color:var(--mut);text-decoration:none;font-size:.9rem}
 .nav a:hover{color:var(--txt)}
+.menubtn{display:none;background:none;border:1px solid var(--line);color:var(--txt);font-size:1.2rem;border-radius:8px;padding:4px 10px;cursor:pointer;margin-left:auto}
+@media(max-width:720px){.menubtn{display:block}.navlinks{display:none;flex-direction:column;gap:10px;width:100%}.navlinks.open{display:flex}.nav div{flex-wrap:wrap}}
+.critter{opacity:0;transform:translateY(24px) scale(.9);transition:opacity .6s ease,transform .6s ease}
+.critter.show{opacity:1;transform:translateY(0) scale(1)}
+.critter.show.float{animation:jvcfloat 4s ease-in-out infinite}
+.critter:hover{transform:scale(1.12)!important;transition:transform .25s ease}
+@keyframes jvcfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 h2{scroll-margin-top:70px}
 .hero{display:grid;gap:clamp(16px,4vw,32px);align-items:center;text-align:center;grid-template-columns:1fr}
 @media(min-width:560px){.hero{grid-template-columns:1.1fr .9fr;text-align:left}.hero .btns{justify-content:flex-start}.hero .sub{margin-left:0}}
@@ -89,7 +96,7 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem)}
 .wrow strong{word-break:break-all;text-align:right}
 .tbig{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;border:1px solid var(--c2);color:var(--c2);font-weight:800;font-size:1.3rem}
 </style></head><body>
-<div class="nav"><div><span class="brand">J-sey · J-seyVibeCat</span><a href="#top">Home</a><a href="#about">About</a><a href="#market">Market Lab</a><a href="#build">Build</a><a href="#board">Leaderboard</a></div></div>
+<div class="nav"><div><span class="brand">J-sey · J-seyVibeCat</span><button class="menubtn" id="menubtn" type="button" aria-label="Menu">&#9776;</button><div class="navlinks" id="navlinks"><a href="#top">Home</a><a href="#about">About</a><a href="#market">Market Lab</a><a href="#build">Build</a><a href="#board">Leaderboard</a></div></div></div>
 <div class="wrap" id="top">
 <div class="hero"><div class="ht">
 <div><span class="tag">TESTNET PROJECT</span></div>
@@ -97,19 +104,19 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem)}
 <div class="tk">$JVC</div>
 <p class="sub">A cyber-cat exploring markets, memes and on-chain ideas. An experimental testnet project by J-sey. No real money, no financial advice.</p>
 <div class="btns"><a class="btn p" href="https://testnet.vibevibe.fun/token/0xA79b75CFed3D0b1de47A313cfE18b2322c51e301" target="_blank" rel="noopener">View on vibe/vibe</a><a class="btn p" href="https://explorer.testnet.chain.robinhood.com/address/0xA79b75CFed3D0b1de47A313cfE18b2322c51e301?tab=index" target="_blank" rel="noopener">Explorer</a><a class="btn p" href="https://x.com/jseyvibecat" target="_blank" rel="noopener">X @jseyvibecat</a></div></div>
-<img class="logo" src="data:image/png;base64,%%LOGO%%" alt="J-seyVibeCat logo">
+<img class="logo critter float" src="data:image/png;base64,%%LOGO%%" alt="J-seyVibeCat logo">
 </div>
 <div class="ca"><small>Contract address (testnet)</small><code id="ca">0xA79b75CFed3D0b1de47A313cfE18b2322c51e301</code><button onclick="copyCA(this)">Copy</button></div>
 <h2 id="about">What we are building</h2><p class="lead">One project spanning all three: meme &amp; storytelling, useful infra, and live market data.</p>
 <div class="grid">
-<div class="card cat"><i class="ic">&#128049;</i><div><b>Meme &amp; Art</b><span>Storytelling, culture and a cyber-cat with a personality.</span></div><em class="arr">&rarr;</em></div>
+<div class="card cat"><i class="ic critter">&#128049;</i><div><b>Meme &amp; Art</b><span>Storytelling, culture and a cyber-cat with a personality.</span></div><em class="arr">&rarr;</em></div>
 <div class="card cat"><i class="ic">&lt;/&gt;</i><div><b>Infra &amp; Product</b><span>Useful tools built around the token launch lifecycle.</span></div><em class="arr">&rarr;</em></div>
 <div class="card cat"><i class="ic">&#128200;</i><div><b>Stock &amp; RWA</b><span>Exploring stock pairs and real-world-asset ideas on testnet.</span></div><em class="arr">&rarr;</em></div>
 </div>
 <h2 id="market">Market Lab <span class="soon">TESTNET</span></h2>
 <p class="lead">Live $JVC data from the testnet explorer. Sample tiles are labelled and are not real prices.</p>
 <div class="mlg">
-<div class="card tile"><span class="live" style="margin:0 0 8px">LIVE</span><div class="th"><img class="lg" id="jlogo" alt="JVC"><div><b>$JVC</b><span>J-seyVibeCat (Testnet)</span></div></div><span class="v" id="jp">Loading...</span><span class="g" id="jst">Loading...</span><div class="mini"><span>Holders <b id="jh">...</b></span><span>Transfers <b id="jt">...</b></span></div><div class="mini"><span>Supply <b id="js">...</b></span></div><div class="mini"><span>24h vol <b id="jv">...</b></span></div></div>
+<div class="card tile"><span class="live" style="margin:0 0 8px">LIVE</span><div class="th"><img class="lg critter" id="jlogo" alt="JVC"><div><b>$JVC</b><span>J-seyVibeCat (Testnet)</span></div></div><span class="v" id="jp">Loading...</span><span class="g" id="jst">Loading...</span><div class="mini"><span>Holders <b id="jh">...</b></span><span>Transfers <b id="jt">...</b></span></div><div class="mini"><span>Supply <b id="js">...</b></span></div><div class="mini"><span>24h vol <b id="jv">...</b></span></div></div>
 <div class="card tile"><span class="smp" id="btcbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#f7931a;color:#fff">&#8383;</i><div><b>BTC-TEST</b><span>Bitcoin (Testnet)</span></div></div><span class="v" id="btcp">$67,832</span><span class="g" id="btcg">+3.2%</span></div>
 <div class="card tile"><span class="smp" id="aaplbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#e5e7eb;color:#111">A</i><div><b>AAPL-TEST</b><span>Apple (Testnet)</span></div></div><span class="v" id="aaplp">$182.34</span><span class="g" id="aaplg">+1.6%</span></div>
 <div class="card tile"><span class="smp" id="goldbadge">SAMPLE DATA</span><div class="th"><i class="lg" style="background:#f5b942;color:#3a2a00">Au</i><div><b>GOLD-TEST</b><span>Gold (RWA)</span></div></div><span class="v" id="goldp">$2,365</span><span class="g" id="goldg">+2.8%</span></div>
@@ -429,4 +436,19 @@ mk('WalletConnect',connectWC);
   render();
 })();
 function copyCA(b){var t=document.getElementById('ca').textContent;navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)})}
+</script>
+<script>
+(function(){
+var mb=document.getElementById('menubtn'),nl=document.getElementById('navlinks');
+if(mb&&nl){mb.addEventListener('click',function(){nl.classList.toggle('open')});
+var links=nl.querySelectorAll('a');for(var i=0;i<links.length;i++){links[i].addEventListener('click',function(){nl.classList.remove('open')})}}
+})();
+(function(){
+if('IntersectionObserver' in window){
+var io=new IntersectionObserver(function(entries){
+entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target)}})
+},{threshold:.2});
+document.querySelectorAll('.critter').forEach(function(el){io.observe(el)})
+}else{document.querySelectorAll('.critter').forEach(function(el){el.classList.add('show')})}
+})();
 </script></body></html>
