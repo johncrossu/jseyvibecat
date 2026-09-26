@@ -46,7 +46,7 @@ html{scroll-behavior:smooth}
 .nav a{color:var(--mut);text-decoration:none;font-size:.9rem}
 .nav a:hover{color:var(--txt)}
 .menubtn{display:none;background:none;border:1px solid var(--line);color:var(--txt);font-size:1.2rem;border-radius:8px;padding:4px 10px;cursor:pointer;margin-left:auto}
-@media(max-width:720px){.menubtn{display:block}.navlinks{display:none;flex-direction:column;gap:10px;width:100%}.navlinks.open{display:flex}.nav div{flex-wrap:wrap}}
+.navwrap{position:relative;margin-left:auto}#navlinks{display:flex}@media(max-width:720px){.menubtn{display:block}#navlinks{display:none;position:absolute;top:100%;right:0;margin-top:8px;background:#0b1020;border:1px solid var(--line);border-radius:10px;padding:12px 18px;flex-direction:column;gap:12px;width:auto;min-width:160px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:20}#navlinks.open{display:flex}}
 .critter{opacity:0;transform:translateY(24px) scale(.9);transition:opacity .6s ease,transform .6s ease}
 .critter.show{opacity:1;transform:translateY(0) scale(1)}
 .critter.show.float{animation:jvcfloat 4s ease-in-out infinite}
@@ -96,7 +96,7 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem)}
 .wrow strong{word-break:break-all;text-align:right}
 .tbig{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;border:1px solid var(--c2);color:var(--c2);font-weight:800;font-size:1.3rem}
 </style></head><body>
-<div class="nav"><div><span class="brand">J-sey · J-seyVibeCat</span><button class="menubtn" id="menubtn" type="button" aria-label="Menu">&#9776;</button><div class="navlinks" id="navlinks"><a href="#top">Home</a><a href="#about">About</a><a href="#market">Market Lab</a><a href="#build">Build</a><a href="#board">Leaderboard</a></div></div></div>
+<div class="nav"><div><span class="brand">J-sey · J-seyVibeCat</span><div class="navwrap"><button class="menubtn" id="menubtn" type="button" aria-label="Menu">&#9776;</button><div class="navlinks" id="navlinks"><a href="#top">Home</a><a href="#about">About</a><a href="#market">Market Lab</a><a href="#build">Build</a><a href="#board">Leaderboard</a></div></div></div></div>
 <div class="wrap" id="top">
 <div class="hero"><div class="ht">
 <div><span class="tag">TESTNET PROJECT</span></div>
@@ -133,11 +133,11 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem)}
 <h2 id="board">Leaderboard <span class="live">LIVE STATS</span></h2>
 <p class="lead">Real $JVC numbers from the testnet explorer.</p>
 <div class="stg"><div class="card stat"><span class="k">Holders</span><span class="big" id="lh">...</span></div><div class="card stat"><span class="k">Transfers</span><span class="big" id="lt">...</span></div><div class="card stat"><span class="k">Total supply</span><span class="big" id="ls">...</span></div></div>
-<div class="card" style="margin-top:12px"><b>Supporter tiers <span class="live">LIVE</span></b><div class="tiers"><i class="tr" style="font-style:normal">F</i><i class="tr" style="font-style:normal">E</i><i class="tr" style="font-style:normal">D</i><i class="tr" style="font-style:normal">C</i><i class="tr" style="font-style:normal">B</i><i class="tr" style="font-style:normal">A</i><i class="tr" style="font-style:normal">S</i></div><span>Holder and supporter tiers from F to S, used for graduation airdrops. Opt-in only.</span></div>
+<div class="card" style="margin-top:12px"><b>Supporter tiers <span class="live">LIVE</span></b><div class="tiers" style="display:flex;flex-wrap:wrap;gap:10px"><div style="text-align:center;width:64px"><img src="/images/stray_vibe.jpg" alt="Stray" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Stray</span></div><div style="text-align:center;width:64px"><img src="/images/rookie_vibe.jpg" alt="Rookie" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Rookie</span></div><div style="text-align:center;width:64px"><img src="/images/nightowl_vibe.jpg" alt="Night Owl" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Night Owl</span></div><div style="text-align:center;width:64px"><img src="/images/street_vibe.jpg" alt="Street" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Street</span></div><div style="text-align:center;width:64px"><img src="/images/scout_vibe.jpg" alt="Scout" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Scout</span></div><div style="text-align:center;width:64px"><img src="/images/hunter_vibe.jpg" alt="Hunter" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Hunter</span></div><div style="text-align:center;width:64px"><img src="/images/alpha_vibe.jpg" alt="Alpha" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Alpha</span></div></div><span>Holder and supporter tiers from Stray to Alpha, used for graduation airdrops. Opt-in only.</span></div>
 <h2>Graduation airdrops <span class="soon">COMING SOON</span></h2>
 <p class="lead">Opt-in only. Builders choose how much supply to airdrop and to whom. Nothing is live yet.</p>
-<div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="card step"><div class="n">1</div><b>Connect your wallet</b><span>Connect the wallet you hold the token with. View only.</span></div><div class="card step"><div class="n">2</div><b>Get your tier</b><span>A holder/supporter score from F to S.</span></div><div class="card step"><div class="n">3</div><b>Auto-send on graduation</b><span>Airdrops are sent automatically when a token graduates.</span></div></div>
-<div class="card" id="wallet" style="margin-top:12px"><b>Check your tier <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 12px">Connect a wallet to see its $JVC balance and tier. View only: no signature, no fees, nothing is saved.</p><button class="btn p" id="wcb" type="button" style="border:0;cursor:pointer">Connect wallet</button><div id="wlist" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;max-width:320px"></div><p class="note" id="wst"></p><div id="wres" style="display:none;margin-top:10px"><div class="wrow"><span>Wallet</span><strong id="wa"></strong></div><div class="wrow"><span>$JVC balance</span><strong id="wb"></strong></div><div class="wrow"><span>Share of supply</span><strong id="wp"></strong></div><div class="wrow" style="border-bottom:0"><span>Your tier</span><strong id="wt" class="tbig"></strong></div></div><p class="note">Tiers by share of supply: S 1%+ &middot; A 0.5%+ &middot; B 0.25%+ &middot; C 0.1%+ &middot; D 0.05%+ &middot; E 0.01%+ &middot; F any amount.</p></div>
+<div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="card step"><div class="n">1</div><b>Connect your wallet</b><span>Connect the wallet you hold the token with. View only.</span></div><div class="card step"><div class="n">2</div><b>Get your tier</b><span>A holder/supporter score from Stray to Alpha.</span></div><div class="card step"><div class="n">3</div><b>Auto-send on graduation</b><span>Airdrops are sent automatically when a token graduates.</span></div></div>
+<div class="card" id="wallet" style="margin-top:12px"><b>Check your tier <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 12px">Connect a wallet to see its $JVC balance and tier. View only: no signature, no fees, nothing is saved.</p><button class="btn p" id="wcb" type="button" style="border:0;cursor:pointer">Connect wallet</button><div id="wlist" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;max-width:320px"></div><p class="note" id="wst"></p><div id="wres" style="display:none;margin-top:10px"><div class="wrow"><span>Wallet</span><strong id="wa"></strong></div><div class="wrow"><span>$JVC balance</span><strong id="wb"></strong></div><div class="wrow"><span>Share of supply</span><strong id="wp"></strong></div><div class="wrow" style="border-bottom:0"><span>Your tier</span><strong id="wt" class="tbig"></strong></div></div><p class="note">Tiers by share of supply: Alpha 1%+ &middot; Hunter 0.5%+ &middot; Scout 0.25%+ &middot; Street 0.1%+ &middot; Night Owl 0.05%+ &middot; Rookie 0.01%+ &middot; Stray any amount.</p></div>
 <footer>Testnet only. Test tokens have no real value. Not financial advice. Not affiliated with vibe/vibe. Built by J-sey. &middot; <a href="https://discord.gg/vibevibebuilders" target="_blank" rel="noopener" style="color:#7dd3fc;text-decoration:underline">Builders Discord</a> &middot; <a href="https://github.com/johncrossu/jseyvibecat" target="_blank" rel="noopener" style="color:#7dd3fc;text-decoration:underline">GitHub</a></footer>
 </div>
 <script>
@@ -239,7 +239,7 @@ var ca=document.getElementById('ca').textContent.trim();
 var B='https://explorer.testnet.chain.robinhood.com/api/v2/';
 var btn=document.getElementById('wcb'),st=document.getElementById('wst'),res=document.getElementById('wres'),list=document.getElementById('wlist');
 if(!btn)return;
-var T=[['S',100],['A',50],['B',25],['C',10],['D',5],['E',1]];
+var T=[['S',100],['A',50],['B',25],['C',10],['D',5],['E',1]];var TIER_NAMES={'S':'Alpha','A':'Hunter','B':'Scout','C':'Street','D':'Night Owl','E':'Rookie','F':'Stray'};
 var provs=[],hooked=[],wcProvider=null,wcMod=null;
 function say(t){st.textContent=t}
 function put(id,t){document.getElementById(id).textContent=t}
@@ -286,7 +286,7 @@ put('wb',(bal/(BigInt(10)**dec)).toLocaleString('en-US'));
 put('wp',(Number(bal*BigInt(10000)/sup)/100).toFixed(2)+'%');
 var tr=tierOf(bal,sup);
 if(window.JVC_SET_HOLDER)window.JVC_SET_HOLDER(verified&&bal>BigInt(0));
-put('wt',tr==='None'?'No $JVC held':tr);
+put('wt',tr==='None'?'No $JVC held':(TIER_NAMES[tr]||tr));
 res.style.display='block';
 btn.textContent='Switch wallet';
 list.innerHTML='';
@@ -440,8 +440,8 @@ function copyCA(b){var t=document.getElementById('ca').textContent;navigator.cli
 <script>
 (function(){
 var mb=document.getElementById('menubtn'),nl=document.getElementById('navlinks');
-if(mb&&nl){mb.addEventListener('click',function(){nl.classList.toggle('open')});
-var links=nl.querySelectorAll('a');for(var i=0;i<links.length;i++){links[i].addEventListener('click',function(){nl.classList.remove('open')})}}
+if(mb&&nl){function closeMenu(){nl.classList.remove('open');mb.innerHTML='&#9776;'}function toggleMenu(){var willOpen=!nl.classList.contains('open');nl.classList.toggle('open');mb.innerHTML=willOpen?'&#10005;':'&#9776;'}mb.addEventListener('click',function(ev){ev.stopPropagation();toggleMenu()});window.addEventListener('pageshow',closeMenu);
+var links=nl.querySelectorAll('a');for(var i=0;i<links.length;i++){links[i].addEventListener('click',closeMenu)}document.addEventListener('click',function(e){if(nl.classList.contains('open')&&!nl.contains(e.target)&&e.target!==mb){closeMenu()}})}
 })();
 (function(){
 if('IntersectionObserver' in window){
@@ -451,4 +451,5 @@ entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show
 document.querySelectorAll('.critter').forEach(function(el){io.observe(el)})
 }else{document.querySelectorAll('.critter').forEach(function(el){el.classList.add('show')})}
 })();
-</script></body></html>
+</script>
+</body></html>
