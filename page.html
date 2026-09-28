@@ -507,7 +507,7 @@ var sig=vis.map(function(r){return r.h+r.bps+r.t}).join('|')+'|'+total;
 if(sig===last)return;last=sig;
 var cnt={},order=['Alpha','Hunter','Scout','Street','Night Owl','Rookie','Stray'];
 vis.forEach(function(r){cnt[r.t]=(cnt[r.t]||0)+1});
-set('tbsum',total+' holders (contracts excluded). '+order.filter(function(n){return cnt[n]}).map(function(n){return n+' '+cnt[n]}).join(' \u00b7 ')+'. Hold 2.5% or more of supply to earn Alpha.');
+set('tbsum',total+' holders. '+order.filter(function(n){return cnt[n]}).map(function(n){return n+' '+cnt[n]}).join(' \u00b7 ')+'. Hold 2.5% or more of supply to earn Alpha.');
 var m=imgs();
 var html=vis.map(function(r,i){
 var im=m[r.t]?'<img src="'+m[r.t]+'" alt="'+r.t+'" style="width:34px;height:34px;border-radius:50%;object-fit:cover">':'<span style="width:34px"></span>';
