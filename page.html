@@ -134,10 +134,11 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem)}
 <p class="lead">Real $JVC numbers from the testnet explorer.</p>
 <div class="stg"><div class="card stat"><span class="k">Holders</span><span class="big" id="lh">...</span></div><div class="card stat"><span class="k">Transfers</span><span class="big" id="lt">...</span></div><div class="card stat"><span class="k">Total supply</span><span class="big" id="ls">...</span></div></div>
 <div class="card" style="margin-top:12px"><b>Supporter tiers <span class="live">LIVE</span></b><div class="tiers" style="display:flex;flex-wrap:wrap;gap:10px"><div style="text-align:center;width:64px"><img src="/images/stray_vibe.jpg" alt="Stray" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Stray</span></div><div style="text-align:center;width:64px"><img src="/images/rookie_vibe.jpg" alt="Rookie" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Rookie</span></div><div style="text-align:center;width:64px"><img src="/images/nightowl_vibe.jpg" alt="Night Owl" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Night Owl</span></div><div style="text-align:center;width:64px"><img src="/images/street_vibe.jpg" alt="Street" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Street</span></div><div style="text-align:center;width:64px"><img src="/images/scout_vibe.jpg" alt="Scout" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Scout</span></div><div style="text-align:center;width:64px"><img src="/images/hunter_vibe.jpg" alt="Hunter" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Hunter</span></div><div style="text-align:center;width:64px"><img src="/images/alpha_vibe.jpg" alt="Alpha" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px"><span style="font-size:11px">Alpha</span></div></div><span>Holder and supporter tiers from Stray to Alpha, opt-in only.</span></div>
+<div class="card" id="tierboard" style="margin-top:12px"><b>Holder ranks <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 10px" id="tbsum">Loading holders...</p><div id="tblist" style="max-height:420px;overflow-y:auto"></div></div>
 <h2>Built for holders <span class="soon">COMING SOON</span></h2>
 <p class="lead">Opt-in only. Your tier reflects real support for $JVC as we build tools that solve real problems for holders.</p>
 <div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="card step"><div class="n">1</div><b>Connect your wallet</b><span>Connect the wallet you hold the token with. View only.</span></div><div class="card step"><div class="n">2</div><b>Get your tier</b><span>A holder/supporter score from Stray to Alpha.</span></div><div class="card step"><div class="n">3</div><b>Unlock what's next</b><span>New holder tools and benefits roll out as they're ready.</span></div></div>
-<div class="card" id="wallet" style="margin-top:12px"><b>Check your tier <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 12px">Connect a wallet to see its $JVC balance and tier. View only: no signature, no fees, nothing is saved.</p><button class="btn p" id="wcb" type="button" style="border:0;cursor:pointer">Connect wallet</button><div id="wlist" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;max-width:320px"></div><p class="note" id="wst"></p><div id="wres" style="display:none;margin-top:10px"><div class="wrow"><span>Wallet</span><strong id="wa"></strong></div><div class="wrow"><span>$JVC balance</span><strong id="wb"></strong></div><div class="wrow"><span>Share of supply</span><strong id="wp"></strong></div><div class="wrow" style="border-bottom:0"><span>Your tier</span><strong id="wt" class="tbig"></strong></div></div><p class="note">Tiers by share of supply: Alpha 1%+ &middot; Hunter 0.5%+ &middot; Scout 0.25%+ &middot; Street 0.1%+ &middot; Night Owl 0.05%+ &middot; Rookie 0.01%+ &middot; Stray any amount.</p></div>
+<div class="card" id="wallet" style="margin-top:12px"><b>Check your tier <span class="live">LIVE</span></b><p class="lead" style="margin:6px 0 12px">Connect a wallet to see its $JVC balance and tier. View only: no signature, no fees, nothing is saved.</p><button class="btn p" id="wcb" type="button" style="border:0;cursor:pointer">Connect wallet</button><div id="wlist" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;max-width:320px"></div><p class="note" id="wst"></p><div id="wres" style="display:none;margin-top:10px"><div class="wrow"><span>Wallet</span><strong id="wa"></strong></div><div class="wrow"><span>$JVC balance</span><strong id="wb"></strong></div><div class="wrow"><span>Share of supply</span><strong id="wp"></strong></div><div class="wrow" style="border-bottom:0"><span>Your tier</span><strong id="wt" class="tbig"></strong></div></div><p class="note">Tiers by share of supply: Alpha 2.5%+ &middot; Hunter 0.5%+ &middot; Scout 0.25%+ &middot; Street 0.1%+ &middot; Night Owl 0.05%+ &middot; Rookie 0.01%+ &middot; Stray any amount.</p></div>
 <footer>Testnet only. Test tokens have no real value. Not financial advice. Not affiliated with vibe/vibe. Built by J-sey. &middot; <a href="https://discord.gg/vibevibebuilders" target="_blank" rel="noopener" style="color:#7dd3fc;text-decoration:underline">Builders Discord</a> &middot; <a href="https://github.com/johncrossu/jseyvibecat" target="_blank" rel="noopener" style="color:#7dd3fc;text-decoration:underline">GitHub</a></footer>
 </div>
 <script>
@@ -239,7 +240,7 @@ var ca=document.getElementById('ca').textContent.trim();
 var B='https://explorer.testnet.chain.robinhood.com/api/v2/';
 var btn=document.getElementById('wcb'),st=document.getElementById('wst'),res=document.getElementById('wres'),list=document.getElementById('wlist');
 if(!btn)return;
-var T=[['S',100],['A',50],['B',25],['C',10],['D',5],['E',1]];var TIER_NAMES={'S':'Alpha','A':'Hunter','B':'Scout','C':'Street','D':'Night Owl','E':'Rookie','F':'Stray'};
+var T=[['S',250],['A',50],['B',25],['C',10],['D',5],['E',1]];var TIER_NAMES={'S':'Alpha','A':'Hunter','B':'Scout','C':'Street','D':'Night Owl','E':'Rookie','F':'Stray'};
 var provs=[],hooked=[],wcProvider=null,wcMod=null;
 function say(t){st.textContent=t}
 function put(id,t){document.getElementById(id).textContent=t}
@@ -450,6 +451,72 @@ entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show
 },{threshold:.2});
 document.querySelectorAll('.critter').forEach(function(el){io.observe(el)})
 }else{document.querySelectorAll('.critter').forEach(function(el){el.classList.add('show')})}
+})();
+</script>
+<script>/*POOLFIX*/
+(function(){
+var R='https://rpc.testnet.chain.robinhood.com',P='0x8366a39cc670b4001a1121b8f6a443a643e40951',ID='0x09ed977e19d6fcabfff7e191911ba5da9272f6c0dde188350ef82a934f95559b',FROM='0x77f8423';
+function rpc(m,p){return fetch(R,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:m,params:p})}).then(function(r){return r.json()}).then(function(j){if(j.error)throw 0;return j.result})}
+function sg(h){var v=BigInt('0x'+h);return v>=(1n<<255n)?v-(1n<<256n):v}
+function px(s){var x=Number(s)/Math.pow(2,96);return 1/(x*x)}
+function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t}
+function w(l,i){return l.data.slice(2+i*64,2+(i+1)*64)}
+function run(){
+Promise.all([rpc('eth_getLogs',[{address:P,fromBlock:FROM,toBlock:'latest',topics:[null,ID]}]),rpc('eth_getBlockByNumber',['latest',false])]).then(function(a){
+var logs=a[0],now=parseInt(a[1].timestamp,16);
+var sw=logs.filter(function(l){return l.data.length===2+64*6});
+var ini=logs.filter(function(l){return l.data.length!==2+64*6})[0];
+var sq=sw.length?BigInt('0x'+w(sw[sw.length-1],2)):(ini?BigInt('0x'+w(ini,3)):null);
+if(sq!==null)set('jp','\u2248'+px(sq).toFixed(14)+' tETH');
+var recent=sw.slice(-300),blocks={};
+recent.forEach(function(l){blocks[l.blockNumber]=1});
+return Promise.all(Object.keys(blocks).map(function(b){return rpc('eth_getBlockByNumber',[b,false]).then(function(x){blocks[b]=parseInt(x.timestamp,16)})})).then(function(){
+var vol=0,n=0;
+recent.forEach(function(l){if(now-blocks[l.blockNumber]<=86400){var v=sg(w(l,0));if(v<0n)v=-v;vol+=Number(v)/1e18;n++}});
+set('jv',n?vol.toFixed(4)+' tETH':'No volume yet');
+});
+}).catch(function(){});
+}
+setTimeout(run,2000);setTimeout(run,6000);setInterval(run,30000);
+})();
+</script>
+<script>/*TIERFIX*/
+(function(){
+var BASE='https://explorer.testnet.chain.robinhood.com/',EX=BASE+'api/v2/',CA='0xA79b75CFed3D0b1de47A313cfE18b2322c51e301',SUP=BigInt(10)**BigInt(27);
+var T=[[250,'Alpha'],[50,'Hunter'],[25,'Scout'],[10,'Street'],[5,'Night Owl'],[1,'Rookie']];
+var last='';
+function tier(b){for(var i=0;i<T.length;i++){if(b>=T[i][0])return T[i][1]}return 'Stray'}
+function set(id,t){var e=document.getElementById(id);t=String(t);if(e&&e.textContent!==t)e.textContent=t}
+function imgs(){var m={};var a=document.querySelectorAll('.tiers img');for(var i=0;i<a.length;i++){m[a[i].alt]=a[i].getAttribute('src')}return m}
+function pull(url,acc,n){return fetch(url).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){acc=acc.concat(d.items||[]);var np=d.next_page_params;if(np&&n<6){return pull(EX+'tokens/'+CA+'/holders?'+new URLSearchParams(np).toString(),acc,n+1)}return acc})}
+function run(){
+if(document.hidden)return;
+pull(EX+'tokens/'+CA+'/holders',[],0).then(function(items){
+/*HIDEWALLET*/var HIDE='0xA1eE7650D9214b4913fb775e9093491e56369F82'.toLowerCase();
+var rows=[];
+items.forEach(function(x){
+var a=x.address||{};if(a.is_contract)return;
+var v=BigInt(x.value||'0');if(v<=BigInt(0))return;
+var bps=Number(v*BigInt(10000)/SUP);
+rows.push({h:a.hash,v:v,bps:bps,pct:(Number(v*BigInt(100000)/SUP)/1000).toFixed(3),t:tier(bps)});
+});
+rows.sort(function(p,q){return p.v>q.v?-1:p.v<q.v?1:0});
+var total=rows.length;set('jh',total);set('lh',total);
+var vis=rows.filter(function(r){return r.h.toLowerCase()!==HIDE});
+var sig=vis.map(function(r){return r.h+r.bps+r.t}).join('|')+'|'+total;
+if(sig===last)return;last=sig;
+var cnt={},order=['Alpha','Hunter','Scout','Street','Night Owl','Rookie','Stray'];
+vis.forEach(function(r){cnt[r.t]=(cnt[r.t]||0)+1});
+set('tbsum',total+' holders (contracts excluded). '+order.filter(function(n){return cnt[n]}).map(function(n){return n+' '+cnt[n]}).join(' \u00b7 ')+'. Hold 2.5% or more of supply to earn Alpha.');
+var m=imgs();
+var html=vis.map(function(r,i){
+var im=m[r.t]?'<img src="'+m[r.t]+'" alt="'+r.t+'" style="width:34px;height:34px;border-radius:50%;object-fit:cover">':'<span style="width:34px"></span>';
+return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(120,140,200,.15)"><span style="width:26px;opacity:.6">'+(i+1)+'</span>'+im+'<div style="flex:1"><b>'+r.t+'</b><br><a href="'+BASE+'address/'+r.h+'" target="_blank" rel="noopener" style="opacity:.7;font-size:12px;color:inherit">'+r.h.slice(0,6)+'...'+r.h.slice(-4)+'</a></div><b>'+r.pct+'%</b></div>';
+}).join('');
+var l=document.getElementById('tblist');if(l)l.innerHTML=html;
+}).catch(function(){});
+}
+setTimeout(run,3000);setTimeout(run,9000);setInterval(run,60000);
 })();
 </script>
 </body></html>
