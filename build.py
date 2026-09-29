@@ -3,8 +3,10 @@ h = open('page.html').read()
 logo = open('logo.b64').read().strip()
 assert len(logo) > 1000, "logo missing"
 h = h.replace('%%LOGO%%', logo)
+P = open('play.html', encoding='utf-8').read()
 js = (
     'const html = ' + json.dumps(h) + ';\n'
+    'const playHtml = ' + json.dumps(P) + ';\n'
     'const logoB64 = ' + json.dumps(logo) + ';\n'
     'function b64ToBytes(b64){const bin=atob(b64);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return bytes}\n\n'
     'export default {\n'
@@ -20,6 +22,7 @@ js = (
     '  if (!obj) return new Response("Not found", { status: 404 });\n'
     '  return new Response(obj.body, { headers: { "content-type": "image/jpeg", "cache-control": "max-age=86400" } });\n'
     '}\n'
+    '    if (url.pathname === "/play" || url.pathname === "/play/") return new Response(playHtml, { headers: { "content-type": "text/html;charset=UTF-8", "cache-control": "no-cache" } });\n'
     '    return new Response(html, { headers: { "content-type": "text/html;charset=UTF-8", "cache-control": "no-cache" } });\n'
     '  }\n'
     '};\n'
