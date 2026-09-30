@@ -285,7 +285,7 @@ a.push(fs);a.sort(function(p,q){return q-p});a=a.slice(0,5);try{localStorage.set
 var t='Top today: ';a.forEach(function(v,i){t+=(i+1)+'. '+v.toLocaleString()+'   '});$('lb').textContent=t;paintMis()}
 function clearBullets(){corpses.forEach(function(c){scene.remove(c.g)});corpses=[];bullets.forEach(function(b){scene.remove(b.m)});bullets=[]}
 function jvcFor(fs){if(fs<cfg.minScore)return 0;return Math.min(cfg.maxJvc,Math.floor(fs/cfg.ptsPerJvc*100)/100)}
-function paintJv(){var fs=Math.floor(score),j=jvcFor(fs);$('jv').textContent='Kills '+kills+'  |  '+(fs>=cfg.minScore?('+'+j.toLocaleString()+' JVC'):(fs.toLocaleString()+' / '+cfg.minScore.toLocaleString()+' to earn JVC'))}
+function paintJv(){var fs=Math.floor(score),j=Math.min(cfg.maxJvc,Math.floor(fs/cfg.ptsPerJvc*100)/100);$('jv').textContent='Kills '+kills+'  |  '+j.toLocaleString()+' JVC'+(fs>=cfg.minScore?' (claimable)':' (claim from '+cfg.minScore.toLocaleString()+' pts)')}
 function stepShots(dt){shootCd-=dt;for(var ci=corpses.length-1;ci>=0;ci--){var c=corpses[ci];c.t+=dt;c.g.position.z+=speed*dt;c.g.rotation.x=-Math.min(1.5,c.t*4);c.g.position.y=-Math.max(0,c.t-0.3)*1.5;if(c.t>0.8){scene.remove(c.g);corpses.splice(ci,1)}}
 if(shootCd<=0){var tg=false;for(var i=0;i<items.length;i++){var zz=items[i];if(zz.t==='zombie'&&!zz.done&&Math.abs(zz.x-cat.position.x)<0.9&&zz.z<-2&&zz.z>-60){tg=true;break}}
 if(tg){var m=new THREE.Mesh(bulGeo,bulMat);m.position.set(cat.position.x,1.1+cat.position.y,-1.2);scene.add(m);bullets.push({m:m,x:cat.position.x,z:-1.2});shootCd=(rapid>0?0.12:0.3);beep(900,0.04,'square',0.03)}}
@@ -345,8 +345,8 @@ function begin(){items.forEach(function(it){scene.remove(it.g)});items=[];
 clearBullets();shield=false;dbl=0;rapid=0;magnet=0;killT=9;kStreak=0;noHit=0;nearCd=0;nextBoss=45;kills=0;shootCd=0;waveIdx=0;lastKind='';gapExtra=0;score=0;combo=0;comboIdle=0;elapsed=0;timeLeft=cfg.startSec;speedMul=1;invuln=0;sinceClock=0;needClock=false;cursor=-40;lane=1;vy=0;shake=0;cat.position.set(0,0,0);
 state='playing';$('menu').style.display='none';$('over').style.display='none';$('hud').style.display='flex';$('snd').style.display='block'}
 function showMenu(){state='menu';$('over').style.display='none';$('menu').style.display='flex';$('hud').style.display='none';$('snd').style.display='none'}
-var VC={V2:'0x72E9D8Dcc49b278121Cf2EbEdc2633beDC18A901',JVC:'0xA79b75CFed3D0b1de47A313cfE18b2322c51e301',CID:'0xb626',EX:'https://explorer.testnet.chain.robinhood.com',API:'https://jsey.dpdns.org/api/vibecat/sign'};
-var vcBusy=false,vcAcct=null,vcSid=null,vcFs=0;
+var VC={V2:'0x2b02ae192A65F60009089DBE43C5390c523a3f50',JVC:'0xA79b75CFed3D0b1de47A313cfE18b2322c51e301',CID:'0xb626',EX:'https://explorer.testnet.chain.robinhood.com',API:'https://jsey.dpdns.org/api/vibecat/sign'};
+var vcBusy=false,vcAcct=null,vcSid=null,vcFs=0,vcFeeHex='0x0';
 function vcSay(m){if(state==='over')$('rjv').textContent=m;else $('rules').textContent=m}
 function vcReq(m,q){return window.ethereum.request({method:m,params:q||[]})}
 function vcErr(e){var c=e&&e.code,m=(e&&e.message)||String(e);if(c===4001||/reject|denied/i.test(m))return 'Cancelled in wallet.';if(/insufficient/i.test(m))return 'Not enough ETH for fee + gas.';return 'Error: '+String(m).slice(0,120)}
@@ -360,12 +360,12 @@ if(!window.ethereum){vcSay('No wallet found. Open this page in a wallet browser 
 vcBusy=true;$('go').disabled=true;$('again').disabled=true;
 var acct,fee,eth;
 return vcReq('eth_requestAccounts').then(function(a){acct=a[0];vcAcct=acct;return vcChain()})
-.then(function(){return Promise.all([vcCall(VC.V2,'0xfcfff16f'),vcCall(VC.V2,'0x072ea61c'),vcCall(VC.V2,'0x4cf1115d')])})
-.then(function(r){if(BigInt(r[0])===0n)throw new Error('Game is closed on chain.');fee=BigInt(r[1]);eth=BigInt(r[2]);
-vcSay('Entry '+vcFmt(fee)+' JVC + '+vcFmt(eth)+' ETH fee + gas. Confirm in wallet...');
+.then(function(){return Promise.all([vcCall(VC.V2,'0xfcfff16f'),Promise.resolve('0x0'),vcCall(VC.V2,'0x99d32fc4'),vcCall(VC.JVC,'0x70a08231'+vcWord(acct))])})
+.then(function(r){if(BigInt(r[0])===0n)throw new Error('Game is closed on chain.');if(BigInt(r[3])<BigInt(Math.round(cfg.minHold||0))*(10n**18n))throw new Error('Hold at least '+(cfg.minHold||0).toLocaleString()+' JVC to play.');fee=BigInt(r[1]);eth=BigInt(r[2]);vcFeeHex='0x'+eth.toString(16);
+vcSay('Confirm entry in wallet (network gas only)...');
 if(fee===0n)return;
 return vcCall(VC.JVC,'0xdd62ed3e'+vcWord(acct)+vcWord(VC.V2)).then(function(al){if(BigInt(al)>=fee)return;vcSay('Approve '+vcFmt(fee)+' JVC in wallet...');return vcReq('eth_sendTransaction',[{from:acct,to:VC.JVC,data:'0x095ea7b3'+vcWord(VC.V2)+vcWord(fee)}]).then(vcWait)})})
-.then(function(){vcSay('Confirm entry in wallet...');return vcReq('eth_sendTransaction',[{from:acct,to:VC.V2,data:'0xe97dcb62',value:'0x'+eth.toString(16)}])})
+.then(function(){vcSay('Confirm entry in wallet...');return vcReq('eth_sendTransaction',[{from:acct,to:VC.V2,data:'0xe97dcb62'}])})
 .then(function(h){vcSay('Entering... waiting for confirmation');return vcWait(h)})
 .then(function(r){var lg=null;r.logs.forEach(function(l){if(l.address.toLowerCase()===VC.V2.toLowerCase()&&l.topics.length===3&&BigInt(l.topics[1])===BigInt(acct))lg=l});if(!lg)throw new Error('Entry event not found');vcSid=BigInt(lg.topics[2]).toString();vcBusy=false;$('go').disabled=false;$('again').disabled=false;return true})
 .catch(function(e){vcBusy=false;$('go').disabled=!cfg.enabled;$('again').disabled=false;vcSay(vcErr(e));return false})}
@@ -376,7 +376,7 @@ fetch(VC.API,{method:'POST',headers:{'content-type':'application/json'},body:JSO
 var sg=String(d.sig).replace(/^0x/,'');var ln=sg.length/2;while(sg.length%64)sg+='0';
 var data='0x6548b7ae'+vcWord(vcSid)+vcWord(d.score)+vcWord(d.amount)+vcWord(128)+vcWord(ln)+sg;
 $('rjv').textContent='Confirm claim in wallet (you pay gas)...';
-return vcReq('eth_sendTransaction',[{from:vcAcct,to:VC.V2,data:data}])})
+return vcReq('eth_sendTransaction',[{from:vcAcct,to:VC.V2,data:data,value:vcFeeHex}])})
 .then(function(h){$('rjv').textContent='Claiming... waiting for confirmation';return vcWait(h).then(function(){var a=document.createElement('a');a.href=VC.EX+'/tx/'+h;a.target='_blank';a.rel='noopener';a.textContent='View on explorer';a.style.color='#7cf';$('rjv').textContent='Claimed! ';$('rjv').appendChild(a);vcBusy=false;$('again').disabled=false})})
 .catch(function(e){vcBusy=false;btn.disabled=false;$('again').disabled=false;$('rjv').textContent=vcErr(e)})}
 function tryStart(){if(vcBusy)return;if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}
@@ -416,7 +416,7 @@ cam.position.set(cam.position.x+sx,camY+sy,camZ);cam.lookAt(cam.position.x*0.5,1
 if(playing){$('sc').textContent=Math.floor(score).toLocaleString();$('tm').textContent=Math.ceil(timeLeft);$('tm').className=timeLeft<=10?'val low':'val';$('cmb').textContent='x'+(1+Math.min(3,Math.floor(combo/8)));paintJv();paintExtra()}}
 var last=0;
 var smS=null,smAcc=0,smIn=[],smPend=[],smOn=false,smRound=false,smBv=[],vcSigned=null,smDT=1/60,smTEST=location.search.indexOf('sim=1')>=0;
-var _lc=loadCfg;loadCfg=function(){return _lc().then(function(){return fetch('https://jsey.dpdns.org/api/vibecat/status',{cache:'no-store'}).then(function(r){return r.json()}).then(function(s){cfg.mode=s.mode==='chain'?'chain':'test'}).catch(function(){})})};
+var _lc=loadCfg;loadCfg=function(){return _lc().then(function(){return fetch('https://jsey.dpdns.org/api/vibecat/status',{cache:'no-store'}).then(function(r){return r.json()}).then(function(s){cfg.mode=s.mode==='chain'?'chain':'test';cfg.minHold=Number(s.minHold)||0}).catch(function(){})})};
 var _bg=begin;begin=function(){smOn=false;smRound=false;_bg()};
 function smClear(){smBv.forEach(function(x){scene.remove(x.m)});smBv=[]}
 var _eg=endGame;endGame=function(){var was=smRound;smRound=false;smOn=false;smClear();_eg();if(was)smFinish()};
@@ -431,13 +431,13 @@ begin()})}
 function smFinish(){if(cfg.mode!=='chain'||!vcSid||!vcAcct)return;var sc=$('claim');sc.style.display='none';$('rjv').textContent='Verifying your round...';vcBusy=true;$('again').disabled=true;
 fetch(VC.API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sessionId:vcSid,player:vcAcct,inputs:smIn})}).then(function(r){return r.json()}).then(function(d){
 if(!d||!d.sig){var m=(d&&d.error)||'Verification failed';throw new Error(m==='Below minimum score'?'Minimum not reached - no reward this round.':m)}
-vcSigned=d;var amt=vcFmt(BigInt(d.amount));$('rs').textContent=Math.floor(d.score).toLocaleString();$('rjv').textContent='Verified! You earned '+amt+' JVC';sc.textContent='Claim '+amt+' JVC';sc.style.display='block';sc.disabled=false;vcBusy=false;$('again').disabled=false})
+vcSigned=d;var amt=vcFmt(BigInt(d.amount));$('rs').textContent=Math.floor(d.score).toLocaleString();$('rjv').textContent='Verified! You earned '+amt+' JVC. Claim cost: about '+vcFmt(BigInt(vcFeeHex))+' ETH';sc.textContent='Claim '+amt+' JVC';sc.style.display='block';sc.disabled=false;vcBusy=false;$('again').disabled=false})
 .catch(function(e){vcBusy=false;$('again').disabled=false;$('rjv').textContent=(e&&e.message)||'Verification failed'})}
 function vcClaim(btn){if(vcBusy||!vcSigned)return;var d=vcSigned;if(String(d.contract).toLowerCase()!==VC.V2.toLowerCase()){$('rjv').textContent='Contract mismatch';return}
 vcBusy=true;btn.disabled=true;$('again').disabled=true;$('rjv').textContent='Confirm claim in wallet (you pay gas)...';
 var sg=String(d.sig).replace(/^0x/,'');var ln=sg.length/2;while(sg.length%64)sg+='0';
 var data='0x6548b7ae'+vcWord(vcSid)+vcWord(d.score)+vcWord(d.amount)+vcWord(128)+vcWord(ln)+sg;
-vcReq('eth_sendTransaction',[{from:vcAcct,to:VC.V2,data:data}]).then(function(h){$('rjv').textContent='Claiming... waiting for confirmation';return vcWait(h).then(function(){vcBusy=false;$('again').disabled=false;$('rjv').textContent='Claimed '+vcFmt(BigInt(d.amount))+' JVC! ';var a=document.createElement('a');a.href=VC.EX+'/tx/'+h;a.target='_blank';a.rel='noopener';a.textContent='View transaction';$('rjv').appendChild(a)})}).catch(function(e){vcBusy=false;btn.disabled=false;$('again').disabled=false;$('rjv').textContent=vcErr(e)})}
+vcReq('eth_sendTransaction',[{from:vcAcct,to:VC.V2,data:data,value:vcFeeHex}]).then(function(h){$('rjv').textContent='Claiming... waiting for confirmation';return vcWait(h).then(function(){vcBusy=false;$('again').disabled=false;$('rjv').textContent='Claimed '+vcFmt(BigInt(d.amount))+' JVC! ';var a=document.createElement('a');a.href=VC.EX+'/tx/'+h;a.target='_blank';a.rel='noopener';a.textContent='View transaction';$('rjv').appendChild(a)})}).catch(function(e){vcBusy=false;btn.disabled=false;$('again').disabled=false;$('rjv').textContent=vcErr(e)})}
 function update(dt){if(smOn&&state==='playing'){smFrame(dt)}else{updateOld(dt)}}
 function smFrame(dt){T+=dt;smAcc=Math.min(0.2,smAcc+dt);var S=smS,pk=S.kills,ps=S.score,pinv=S.invuln,psh=S.shield,pvy=S.vy,n=0;
 while(smAcc>=smDT&&n<6&&!S.over){var a=smPend;smPend=[];for(var i=0;i<a.length;i++)smIn.push([S.tick,a[i]]);VCSim.step(S,a);S.tick++;smAcc-=smDT;n++}
