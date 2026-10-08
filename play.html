@@ -3,6 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Vibe Hunt - J-seyVibeCat</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#050816">
 <style>
 :root{--bg:#050816;--card:#0b1230;--line:#1c2a5a;--txt:#e8f0ff;--mut:#9fb3d9;--c1:#22d3ee;--c2:#a855f7;--ok:#22c55e;--bad:#ef4444}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -52,6 +54,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font:15px/1
 <p id="rules"></p><p id="mis" style="font-size:12px;color:#ffc933"></p>
 <p id="off" style="display:none;color:#fca5a5">The game is switched off right now. Come back soon.</p>
 <button class="btn" id="go">Start</button>
+<button class="btn alt" id="inst" style="display:none">Install app (wallet returns you here)</button>
 <a class="btn alt" href="/">Back to J-seyVibeCat</a>
 </div></div>
 <div class="ov" id="over" style="display:none"><div class="card">
@@ -707,4 +710,5 @@ if(pl===false&&ready){ready=false;if(ctx)mst.gain.setTargetAtTime(0,ctx.currentT
 if(ready&&ctx){while(nt<ctx.currentTime+0.4){sched(nt,st,nt-t0);nt+=SP;st++}}},30);
 })();
 </script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js',{scope:'/play'}).catch(function(){})}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();var b=document.getElementById('inst');if(!b)return;b.style.display='block';b.onclick=function(){e.prompt();b.style.display='none'}});</script>
 </body></html>
