@@ -4,8 +4,6 @@ logo = open('logo.b64').read().strip()
 assert len(logo) > 1000, "logo missing"
 h = h.replace('%%LOGO%%', logo)
 P = open('play.html', encoding='utf-8').read()
-MANIFEST_JSON = '{"name": "Vibe Hunt - J-seyVibeCat", "short_name": "Vibe Hunt", "start_url": "/play", "scope": "/play", "display": "standalone", "background_color": "#050816", "theme_color": "#050816", "icons": [{"src": "/og.png", "sizes": "320x320", "type": "image/png", "purpose": "any"}]}'
-SW_JS = "self.addEventListener('install',function(e){self.skipWaiting()});self.addEventListener('activate',function(e){e.waitUntil(self.clients.claim())});self.addEventListener('fetch',function(e){});"
 js = (
     'const html = ' + json.dumps(h) + ';\n'
     'const playHtml = ' + json.dumps(P) + ';\n'
@@ -61,8 +59,6 @@ js = (
     '  return new Response(obj.body, { headers: { "content-type": "image/jpeg", "cache-control": "max-age=86400" } });\n'
     '}\n'
     '    if (url.pathname === "/play" || url.pathname === "/play/") return new Response(playHtml, { headers: { "content-type": "text/html;charset=UTF-8", "cache-control": "no-cache" } });\n'
-    '    if (url.pathname === "/manifest.webmanifest") return new Response(' + json.dumps(MANIFEST_JSON) + ', { headers: { "content-type": "application/manifest+json", "cache-control": "no-cache" } });\n'
-    '    if (url.pathname === "/sw.js") return new Response(' + json.dumps(SW_JS) + ', { headers: { "content-type": "application/javascript", "cache-control": "no-cache" } });\n'
     '    return new Response(html, { headers: { "content-type": "text/html;charset=UTF-8", "cache-control": "no-cache" } });\n'
     '  }\n'
     '};\n'
